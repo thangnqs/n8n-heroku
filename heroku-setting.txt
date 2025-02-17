@@ -1,0 +1,6 @@
+DATABASE_URL=<auto_created>
+DB_POSTGRESDB_SSL_REJECT_UNAUTHORIZED=false
+GENERIC_TIMEZONE=Asia/Ho_Chi_Minh
+N8N_ENCRYPTION_KEY=<create_a_string_key_you_want>
+PAPERTRAIL_API_TOKEN=<auto_created>
+WEBHOOK_URL=<domain_setup_heroku>
