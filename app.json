@@ -1,43 +1,53 @@
 {
-    "name": "n8n",
-    "description": "deploy n8n to heroku without any hassle",
-    "keywords": [
-      "n8n",
-      "node",
-      "automation"
-    ],
-    "website": "https://n8n.io",
-    "repository": "https://github.com/n8n-io/n8n-heroku",
-    "logo": "https://raw.githubusercontent.com/n8n-io/n8n-heroku/main/n8n_logo.png",
-    "success_url": "/",
-    "stack": "container",
-    "env": {
-      "GENERIC_TIMEZONE": {
-        "description": "Time Zone to use with Heroku. You can find the name of your timezone for example here: https://momentjs.com/timezone/.",
-        "value": "Asia/Ho_Chi_Minh"
-      },
-      "N8N_ENCRYPTION_KEY": {
-        "description": "Set the n8n encryption key to a static value to avoid Heroku overriding it (causing authentication to fail).",
-        "value": "change-me-to-something-else"
-      },
-      "WEBHOOK_URL": {
-        "description": "Replace <appname> with your Heroku application name. This will ensure the correct webhook URLs are being shown in n8n.",
-        "value": "https://<appname>.herokuapp.com"
-      },
-      "DB_POSTGRESDB_SSL_REJECT_UNAUTHORIZED": {
-        "description": "SSL is required to connect to Postgres on Heroku",
-        "value": "false"
+  "name": "n8n",
+  "description": "Deploy n8n to Heroku without any hassle",
+  "keywords": [
+    "n8n",
+    "node",
+    "automation",
+    "workflow"
+  ],
+  "website": "https://n8n.io",
+  "repository": "https://github.com/n8n-io/n8n-heroku",
+  "logo": "https://raw.githubusercontent.com/n8n-io/n8n-heroku/main/n8n_logo.png",
+  "success_url": "/",
+  "stack": "container",
+  "env": {
+    "GENERIC_TIMEZONE": {
+      "description": "Time Zone to use with Heroku. Find your timezone at: https://momentjs.com/timezone/",
+      "value": "Asia/Ho_Chi_Minh",
+      "required": true
+    },
+    "N8N_ENCRYPTION_KEY": {
+      "description": "Encryption key for n8n credentials. Change this to a secure random string.",
+      "generator": "secret"
+    },
+    "WEBHOOK_URL": {
+      "description": "Your Heroku app URL for webhooks. Replace <appname> with your app name.",
+      "value": "https://<appname>.herokuapp.com",
+      "required": true
+    },
+    "DB_POSTGRESDB_SSL_REJECT_UNAUTHORIZED": {
+      "description": "Required for Heroku Postgres SSL connection",
+      "value": "false",
+      "required": true
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "basic"
+    }
+  },
+  "addons": [
+    {
+      "plan": "heroku-postgresql:essential-0",
+      "options": {
+        "version": "16"
       }
     },
-    "addons": [
-      {
-        "plan": "heroku-postgresql",
-        "options": {
-          "version": "16"
-        }
-      },
-      {
-        "plan": "papertrail:choklad"
-      }
-    ]
-  }
+    {
+      "plan": "papertrail:choklad"
+    }
+  ]
+}
