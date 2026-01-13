@@ -41,10 +41,7 @@
   },
   "addons": [
     {
-      "plan": "heroku-postgresql:essential-0",
-      "options": {
-        "version": "16"
-      }
+      "plan": "heroku-postgresql:essential-0"
     },
     {
       "plan": "papertrail:choklad"
